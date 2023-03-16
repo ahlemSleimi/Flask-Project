@@ -15,6 +15,9 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 db = SQLAlchemy(app)
 ma = Marshmallow(app)
 
+'''all the classes related to the application with many to many relatioship between item and orders'''
+
+'''class contact'''
 class contact(db.Model):
     __tablename__ = "contact"
     
@@ -41,19 +44,9 @@ class contact(db.Model):
 
 
 
-   
-    # def __init__(self) -> None:
-    #     self.ID = None
-    #     self.AccountName=None
-    #     self.AddressLine1=None
-    #     self.AddressLine2=None
-    #     self.City=None
-    #     self.ContactName=None
-    #     self.Country=None
-    #     self.ZipCode=None
     
     
-    
+'''association class between commande and article '''    
 class articleCo(db.Model):
     __tablename__ = "article_co"
     
@@ -78,7 +71,7 @@ class articleCo(db.Model):
     
     
 
-
+'''the class describing the items available '''
 class article(db.Model):
     __tablename__ = "item"
     
@@ -93,6 +86,7 @@ class article(db.Model):
     #commandes = db.relationship(commande, secondary="article_co",backref='item.Item')
     #orders= db.relationship('commande' ,backref=db.backref('items'),lazy='dynamic')
 
+'''class describe the orders'''
 class commande(db.Model):
     
     __tablename__ = "order"
@@ -106,28 +100,13 @@ class commande(db.Model):
     articles = db.relationship( 'article' , secondary='article_co', backref='commande')
     
     
-    # def __init__(self, OrderID,OrderNumber, Currency,Amount,DeliverTo):
-    #     self.OrderID = OrderID
-    #     self.OrderNumber=OrderNumber
-    #     self.Currency=Currency
-    #     self.Amount=Amount
-    #     self.DeliverTo=DeliverTo
-
-
-# articleCo =(
-#     db.Table('article_co',
-#     Quantity=db.Column('Quantity',db.Integer, nullable=False),
-#     Amount=db.Column('Amount',db.Float , nullable=False),
-#     VATAmount=db.Column('VATAmount',db.Float, nullable=False),
-#     VATPercentage=db.Column('VATPercentage',db.Float, nullable=False),
-#     item_id=db.Column('item_id',db.String(50), db.ForeignKey("item.Item"), nullable=False),
-#     order_id=db.Column('order_id',db.String(50), db.ForeignKey("order.OrderID"), nullable=False)))
+   
 
 
 
 
 
-
+'''the mapping btween the database and the provided classes'''
 class contactSchema(ma.SQLAlchemyAutoSchema):
     class Meta:
         model = contact
@@ -173,7 +152,7 @@ artlcos_schema = articleSchema(many=True)
 
 
 
-
+'''application context to run the flask app'''
 try:
      with app.app_context():
         db.create_all()

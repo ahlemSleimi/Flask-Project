@@ -11,14 +11,14 @@ import pandas as pd
 
 
 
-
+''' this medhod to get all orders from database'''
 @app.route('/orders', methods=['GET'])
 def get_all_orders():
     all_commande = commande.query.all()
     return jsonify(cmds_schema.dump(all_commande))
 
 
-
+'''this endpoint is to store items and orders into the database and tranforme it to csv file however the forme of the csv is not the right one''' 
 @app.route('/flow/orders_to_csv',methods=['Post'])
 def addOrders():
     
@@ -52,8 +52,7 @@ def addOrders():
                             
                             
                             
-                            
-    commandes = []
+    
     for comande in x['results']:
         
         commd = commande.query.filter(commande.OrderID==comande.get('OrderID')).one_or_none()
@@ -122,14 +121,14 @@ def addContact():
         print("done") 
         return  contact_schemas.jsonify([objc for objc in lc])         
                     
-        
+'''get all the contacts in the database  '''       
 @app.route('/contacts', methods=['GET'])                    
 def getContact():
     all_contact = contact.query.all()
     return jsonify(contact_schemas.dump(all_contact))
 
 
-    
+'''get contact by id '''
 @app.route('/contacts/<string:id>/', methods=['GET'])   
 def getContactbyId(id):
     contact_ID=contact.query.get(id)
