@@ -41,7 +41,17 @@ class contact(db.Model):
         self.ContactName=contactName
         self.Country=country
         self.ZipCode=zipcode
-
+        
+    def __init__(self):
+        self.ID=None
+        self.AccountName=None
+        self.AddressLine1=None
+        self.AddressLine2=None
+        self.City=None
+        self.ContactName=None
+        self.Country=None
+        self.ZipCode=None
+        
 
 
     
@@ -113,7 +123,7 @@ class contactSchema(ma.SQLAlchemyAutoSchema):
         load_instance = True
         sqla_session = db.session
 
-contact_schema = contactSchema
+contact_schema = contactSchema(many=False)
 contact_schemas = contactSchema(many=True)
 
 class commandeSchema(ma.SQLAlchemyAutoSchema):
@@ -152,10 +162,3 @@ artlcos_schema = articleSchema(many=True)
 
 
 
-'''application context to run the flask app'''
-try:
-     with app.app_context():
-        db.create_all()
-        db.session.commit()
-except:
-        print('"tables exist"' )
