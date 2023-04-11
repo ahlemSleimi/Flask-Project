@@ -1,0 +1,64 @@
+<html>
+    <body>
+    <div>
+    <h1> List of all commande</h1>
+    
+
+    <table>
+      <tr>
+        <th>OrderID</th>
+        <th>OrderNumber</th>
+        <th>DeliverTo</th>
+        <th>Amount</th>
+        <th>Currency</th>
+        
+      </tr>
+      {%for i in all_commande%}
+      <tr>
+        <td>{{i.OrderID }}</td>
+        <td>{{i.OrderNumber }}</td>
+        <td>{{i.DeliverTo }}</td>
+        <td>{{i.Amount }}</td>
+        <td>{{i.Currency }}</td>
+
+      </tr>
+      {% endfor %} 
+    </table>
+  </div>
+  <div>
+    <h1>List of all items available </h1>
+    <table>
+      <tr>
+        <th>ID</th>
+       
+        
+      </tr>
+      {%for i in all_contact %}
+      <tr>
+        <td>{{i.ID }}</td>
+        
+
+      </tr>
+      {% endfor %} 
+    </table> 
+
+
+
+  </div>
+
+    </body>
+
+
+
+  </html>
+
+<style>
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+  h1{
+    color: rebeccapurple;
+    
+  }
+</style>

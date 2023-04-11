@@ -1,9 +1,10 @@
-from core import *
+
 from core.Models import *
-from flask import Flask, abort, request,jsonify
+from flask import Flask, abort, request,jsonify,render_template
 import requests
-#from core.Models import app
+#git from core.Models import app
 from core import app
+from core import *
 import csv
 
 
@@ -11,10 +12,14 @@ import csv
 
 
 ''' this medhod to get all orders from database'''
-@app.route('/orders', methods=['GET'])
+#@app.route('/orders', methods=['GET'])
+@app.route('/Orders')
 def get_all_orders():
     all_commande = commande.query.all()
-    return jsonify(cmds_schema.dump(all_commande))
+    #return jsonify(cmds_schema.dump(all_commande))
+    
+    return render_template('interface.html',all_commande=all_commande)
+
 
 
 
@@ -123,18 +128,22 @@ def addOrders():
 
  
 def analytics():
-     pass
+    pass
  
           
  
 
 
                   
-'''get all the contacts in the database  '''       
-@app.route('/contacts', methods=['GET'])                    
+'''get all the contacts in the database  '''  
+    
+@app.route('/contacts', methods=['GET'])
+#@app.route('/hello')                     
 def getContact():
     all_contact = contact.query.all()
     return jsonify(contact_schemas.dump(all_contact))
+    # print("contact")
+    # return render_template("interface.html",all_contact=all_contact)
 
 
 # '''get contact by id '''

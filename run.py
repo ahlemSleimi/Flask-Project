@@ -15,8 +15,7 @@ if __name__ == '__main__':
         with app.app_context():
             db.create_all()
             db.session.commit()
-    except:
-            print('"tables exist"' )
+    except Exception as e  :print(e)
     
     app.run(debug=True)
     
